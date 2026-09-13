@@ -1,0 +1,8 @@
+argparse
+logging
+langchain
+langgraph
+pathlib
+pypdf
+python-dotenv
+typing
