@@ -8,37 +8,22 @@ Unlike standard RAG pipelines, HypoGen implements a **Self-Correction Loop**, wh
 
 ## Key Features
 
-- ** Automated Literature Synthesis:** Ingests folders of PDFs and TXT files, creating a local vector database via ChromaDB.
-- ** Agentic Reasoning Loop:** Uses `LangGraph` to manage a stateful workflow:
+- **Automated Literature Synthesis:** Ingests folders of PDFs and TXT files, creating a local vector database via ChromaDB.
+- **Agentic Reasoning Loop:** Uses `LangGraph` to manage a stateful workflow:
     - **Literature Analyst:** Iteratively queries the database to gather evidence.
     - **Hypothesizer:** Synthesizes a causal, testable hypothesis.
     - **Falsifier (The Auditor):** Actively searches for contradictions between the hypothesis and the retrieved facts.
     - **Problem Redefiner:** Pivots the research question if the hypothesis is falsified.
-- ** Experimental Design (DoE):** Automatically generates a Full Factorial Design based on the identified variables to verify the final hypothesis.
-- ** Hallucination Mitigation:** Temperature is set to `0` and prompts are strictly grounded in retrieved evidence.
+- **Experimental Design (DoE):** Automatically generates a Full Factorial Design based on the identified variables to verify the final hypothesis.
+- **Hallucination Mitigation:** Temperature is set to `0` and prompts are strictly grounded in retrieved evidence.
 
 ---
 
 ## System Architecture
 
-The agent operates as a state machine using a directed graph:
+The agent operates as a state machine using a directed graph, which is shown below:
 
-```mermaid
-graph TD
-    A [Start: Scientific Problem] --> B[LLM Literature Analyst]
-    B --> C{Needs More Info?}
-    C -- Yes --> D[Retriever Tool]
-    D --> B
-    C -- No --> E[Hypothesizer]
-    E --> F[Falsifier/Auditor]
-    F --> G{Contradiction Found?}
-    G -- Yes --> H[Problem Redefiner]
-    H --> E
-    G -- No --> I[DoE Proposer]
-    I --> J[Final Output: Facts + Hypothesis + DoE]
-```
 ![plot](Graph.png)
-
 
 ---
 
@@ -86,6 +71,10 @@ COLLECTION_NAME="Zeolite"
 2. **Run the agent:**
 ```bash
 python HypoGen.py --document_path ./documents --database_path ./ChromaDB
+```
+or run with the default directories ./documents and ./ChromaDB as:
+```bash
+python HypoGen.py
 ```
 
 ### Example Workflow:
