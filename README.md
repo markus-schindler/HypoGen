@@ -92,6 +92,6 @@ COLLECTION_NAME=scientific_papers
 
 ## License
 
-This project is licensed under the Unlicense - see the LICENSE file for details
+This project is licensed under the MIT License - see the LICENSE file for details
 
 © 2026 Markus Schindler
