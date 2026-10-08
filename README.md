@@ -58,8 +58,8 @@ pip install -r requirements.txt
 ### 3. Configuration
 Create a `.env` file in the root directory:
 ```env
-LLM=llama3
-LLM_EMBEDDING=nomic-embed-text
+LLM=qwen3:8b
+LLM_EMBEDDING=qwen3-embedding:8b
 RETRIEVER_K=5
 RETRIEVER_FETCH_K=20
 COLLECTION_NAME=scientific_papers
